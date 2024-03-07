@@ -45,16 +45,19 @@ let sketch = function (p: p5) {
   // const point = new Point(19000, 10000);
   // const point2 = new Point(10000, 10000);
 
-  // from input6.txt
-  const points: Point[] = [
-    new Point(19000, 10000, p),
-    new Point(18000, 10000, p),
-    new Point(32000, 10000, p),
-    new Point(21000, 10000, p),
-    new Point(1234, 5678, p),
-    new Point(14000, 10000, p)
-  ]
-
+  // from input10.txt
+  const points = [
+    new Point(4000, 30000, p),
+    new Point(3500, 28000, p),
+    new Point(3000, 26000, p),
+    new Point(2000, 22000, p),
+    new Point(1000, 18000, p),
+    new Point(13000, 21000, p),
+    new Point(23000, 16000, p),
+    new Point(28000, 13500, p),
+    new Point(28000, 5000, p),
+    new Point(28000, 1000, p)
+  ];
   p.draw = function () {
     p.translate(padding, height - padding)
     p.scale(1 / 100, -1 / 100)

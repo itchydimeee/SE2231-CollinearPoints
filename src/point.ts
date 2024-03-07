@@ -21,5 +21,18 @@ export default class Point {
     this.p.line(this.x, this.y, that.x, that.y)
   }
 
-  slopeTo (that: Point): number {}
+  slopeTo(that: Point): number {
+    const dx = that.x - this.x;
+    const dy = that.y - this.y;
+  
+    if (dx === 0 && dy === 0) {
+      return -Infinity
+    } else if (dx === 0) {
+      return Infinity 
+    } else if (dy === 0) {
+      return 0 
+    } else {
+      return dy / dx
+    }
+  }
 }
