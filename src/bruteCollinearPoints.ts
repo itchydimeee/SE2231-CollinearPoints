@@ -1,3 +1,5 @@
+import { mergeSort } from "./mergesort";
+
 export default class BruteCollinearPoints {
     constructor(points: Point[]) {
     // YOUR CODE HERE
