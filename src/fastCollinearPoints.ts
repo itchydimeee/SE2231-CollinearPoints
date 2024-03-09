@@ -1,3 +1,5 @@
+import { mergeSort } from "./mergesort";
+
 export default class FastCollinearPoints {
     constructor(points: Point[]) {
     // YOUR CODE HERE
