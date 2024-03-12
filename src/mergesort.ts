@@ -1,22 +1,27 @@
 import Point from "./point";
 
-export function mergeSort(points: Point[]): Point[] {
-  if (points.length <= 1) return points;
+interface SlopeAndPoint {
+  slope: number;
+  point: Point;
+}
 
-  const middle = Math.floor(points.length / 2);
-  const left = points.slice(0, middle);
-  const right = points.slice(middle);
+export function mergeSort(arr: SlopeAndPoint[]): SlopeAndPoint[] {
+  if (arr.length <= 1) return arr;
+
+  const middle = Math.floor(arr.length / 2);
+  const left = arr.slice(0, middle);
+  const right = arr.slice(middle);
 
   return merge(mergeSort(left), mergeSort(right));
 }
 
-function merge(left: Point[], right: Point[]): Point[] {
-  let result = [];
+function merge(left: SlopeAndPoint[], right: SlopeAndPoint[]): SlopeAndPoint[] {
+  let result: SlopeAndPoint[] = [];
   let leftIndex = 0;
   let rightIndex = 0;
 
   while (leftIndex < left.length && rightIndex < right.length) {
-    if (left[leftIndex].compareTo(right[rightIndex]) < 0) {
+    if (left[leftIndex].slope < right[rightIndex].slope) {
       result.push(left[leftIndex]);
       leftIndex++;
     } else {

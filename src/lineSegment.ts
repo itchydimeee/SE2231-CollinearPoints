@@ -2,7 +2,7 @@ import Point from "./point";
 
 declare const p5: any; // This line assumes that p5 is available globally
 
-class LineSegment {
+export class LineSegment {
   p: Point;
   q: Point;
 
