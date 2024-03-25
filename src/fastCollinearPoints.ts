@@ -2,6 +2,7 @@ import Point from "./point";
 import { LineSegment } from "./lineSegment";
 import { mergeSort } from "./mergesort";
 
+
 export default class FastCollinearPoints {
   private lineSegments: LineSegment[];
 
