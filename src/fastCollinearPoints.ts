@@ -1,67 +1,58 @@
-import { mergeSort } from "./mergesort";
-import { LineSegment } from "./lineSegment";
 import Point from "./point";
+import { LineSegment } from "./lineSegment";
+import { mergeSort } from "./mergesort";
 
-export class FastCollinearPoints {
-  private lineSegments: LineSegment[] = [];
+
+export default class FastCollinearPoints {
+  private lineSegments: LineSegment[];
+
 
   constructor(points: Point[]) {
-    if (!points || points.some((p) => !p)) {
-      throw new Error("Null argument or null point in argument");
-    }
+    this.lineSegments = [];
+    this.findCollinearPoints(points);
+  }
 
-    const pointSet = new Set(points.map((p) => `${p.x},${p.y}`));
-    if (pointSet.size !== points.length) {
-      throw new Error("Repeated point in argument");
-    }
 
-    for (const p of points) {
-      const slopesAndPoints: { slope: number; point: Point }[] = [];
-      for (const q of points) {
-        if (p !== q) {
-          slopesAndPoints.push({ slope: p.slopeTo(q), point: q });
-        }
-      }
+  private findCollinearPoints(points: Point[]) {
+    const n = points.length;
 
-      const sortedSlopesAndPoints = mergeSort(slopesAndPoints);
+
+    for (let i = 0; i < n; i++) {
+      const origin = points[i];
+      const sortedPoints = [...points];
+      sortedPoints.splice(i, 1); // Remove the origin point
+      sortedPoints.sort((p1, p2) => origin.slopeTo(p1) - origin.slopeTo(p2));
+
 
       let start = 0;
-      while (start < sortedSlopesAndPoints.length) {
-        let currSlope = sortedSlopesAndPoints[start].slope;
-        let count = 1;
-        for (let j = start + 1; j < sortedSlopesAndPoints.length; j++) {
-          if (sortedSlopesAndPoints[j].slope === currSlope) {
-            count++;
-          } else {
-            break;
-          }
+      while (start < sortedPoints.length) {
+        let end = start + 1;
+        while (
+          end < sortedPoints.length &&
+          origin.slopeTo(sortedPoints[start]) === origin.slopeTo(sortedPoints[end])
+        ) {
+          end++;
         }
 
-        if (count >= 3) {
-          const segment = new LineSegment(
-            p,
-            sortedSlopesAndPoints[start].point,
-          );
-          for (let j = start + 1; j < start + count; j++) {
-            if (sortedSlopesAndPoints[j].point.compareTo(segment.p) < 0) {
-              segment.p = sortedSlopesAndPoints[j].point;
-            } else if (
-              sortedSlopesAndPoints[j].point.compareTo(segment.q) > 0
-            ) {
-              segment.q = sortedSlopesAndPoints[j].point;
-            }
-          }
-          this.lineSegments.push(segment);
+
+        if (end - start >= 3) {
+          const collinearPoints = [origin, ...sortedPoints.slice(start, end)];
+          const sortedCollinearPoints = mergeSort(collinearPoints);
+          const lineSegment = new LineSegment(sortedCollinearPoints[0], sortedCollinearPoints[sortedCollinearPoints.length - 1]);
+          this.lineSegments.push(lineSegment);
         }
 
-        start += count;
+
+        start = end;
       }
     }
   }
+
 
   numberOfSegments(): number {
     return this.lineSegments.length;
   }
+
 
   segments(): LineSegment[] {
     return this.lineSegments;
