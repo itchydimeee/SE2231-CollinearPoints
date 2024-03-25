@@ -1,41 +1,59 @@
-import { LineSegment } from "./lineSegment";
 import Point from "./point";
+import { LineSegment } from "./lineSegment";
+import { mergeSort } from "./mergesort";
 
-export class BruteCollinearPoints {
-  private lineSegments: LineSegment[] = [];
+
+export default class BruteCollinearPoints {
+  private lineSegments: LineSegment[];
+
 
   constructor(points: Point[]) {
-    if (!points || points.some((p) => !p)) {
-      throw new Error("You can have a null point");
-    }
+    this.lineSegments = [];
+    this.findCollinearPoints(points);
+  }
 
-    const set = new Set(points.map((p) => `${p.x},${p.y}`));
-    if (set.size !== points.length) {
-      throw new Error("Encountered a repeated point in argument");
-    }
 
-    for (let i = 0; i < points.length; i++) {
-      for (let j = i + 1; j < points.length; j++) {
-        for (let k = j + 1; k < points.length; k++) {
-          for (let l = k + 1; l < points.length; l++) {
-            const p = points[i];
-            const q = points[j];
-            const r = points[k];
-            const s = points[l];
+  private findCollinearPoints(points: Point[]) {
+    const n = points.length;
 
-            if (q.slopeTo(r) === p.slopeTo(q)) {
-              if (q.slopeTo(r) === r.slopeTo(s)) {
-                this.lineSegments.push(new LineSegment(p, s));
-              }
+
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        for (let k = j + 1; k < n; k++) {
+          for (let l = k + 1; l < n; l++) {
+            const p1 = points[i];
+            const p2 = points[j];
+            const p3 = points[k];
+            const p4 = points[l];
+
+
+            if (this.areCollinear(p1, p2, p3, p4)) {
+              const collinearPoints = mergeSort([p1, p2, p3, p4]);
+              const lineSegment = new LineSegment(collinearPoints[0], collinearPoints[collinearPoints.length - 1]);
+              this.lineSegments.push(lineSegment);
             }
           }
         }
       }
     }
   }
+
+
+  private areCollinear(p1: Point, p2: Point, p3: Point, p4: Point): boolean {
+    const slope1 = p1.slopeTo(p2);
+    const slope2 = p1.slopeTo(p3);
+    const slope3 = p1.slopeTo(p4);
+
+
+    return slope1 === slope2 && slope2 === slope3;
+  }
+
+
   numberOfSegments(): number {
     return this.lineSegments.length;
   }
+
+
   segments(): LineSegment[] {
     return this.lineSegments;
   }
