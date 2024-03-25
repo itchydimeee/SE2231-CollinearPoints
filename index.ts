@@ -12,7 +12,7 @@ let sketch = function (p: p5) {
   p.setup = function () {
     p.createCanvas(width, height)
 
-    p.strokeWeight(3)
+    p.strokeWeight(7)
     p.stroke('blue')
 
     // x and y axes
@@ -72,8 +72,14 @@ let sketch = function (p: p5) {
       point.draw()
     }
 
-    const collinear = new FastCollinearPoints(points)
-    for (const segment of collinear.segments()) {
+    // const collinear1 = new FastCollinearPoints(points)
+    // for (const segment of collinear1.segments()) {
+    //   console.log(segment.toString())
+    //   segment.draw()
+    // }
+
+    const collinear2 = new BruteCollinearPoints(points)
+    for (const segment of collinear2.segments()) {
       console.log(segment.toString())
       segment.draw()
     }
