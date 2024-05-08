@@ -1,37 +1,49 @@
+
 import p5 from "p5";
 
-const width: number = 800;
-const height: number = 500;
-const padding: number = 50;
+const width: number = 800
+const height: number = 500
+const padding: number = 50
+
 
 let sketch = function (p: p5) {
+ 
   p.setup = function () {
-    p.createCanvas(width, height);
+    p.createCanvas(width, height)
 
-    p.strokeWeight(3);
-    p.stroke("blue");
+
+    p.strokeWeight(7)
+    p.stroke('blue')
+
 
     // x and y axes
-    p.line(padding, padding, padding, height - padding);
-    p.line(padding, height - padding, width - padding, height - padding);
+    p.line(padding, padding, padding, height - padding)
+    p.line(padding, height - padding, width - padding, height - padding)
+
 
     // y-axis arrow head
-    p.line(padding, padding, padding - 5, padding + 5);
-    p.line(padding, padding, padding + 5, padding + 5);
+    p.line(padding, padding, padding - 5, padding + 5)
+    p.line(padding, padding, padding + 5, padding + 5)
+
 
     // x-axis arrow head
     p.line(
       width - padding,
       height - padding,
       width - padding - 5,
-      height - padding + 5,
-    );
+      height - padding + 5
+    )
     p.line(
       width - padding,
       height - padding,
       width - padding - 5,
-      height - padding - 5,
-    );
+      height - padding - 5
+    )
+
+
+    p.strokeWeight(0)
+    p.text('(0, 0)', padding + 10, height - 30)
+  }
 
     p.strokeWeight(0);
     p.text("(0, 0)", padding + 10, height - 30);
@@ -289,17 +301,20 @@ let sketch = function (p: p5) {
   ];
 
   p.draw = function () {
-    p.translate(padding, height - padding);
-    p.scale(1 / 100, -1 / 100);
+    p.translate(padding, height - padding)
+    p.scale(1 / 100, -1 / 100)
+
 
     // Call your draw and drawTo here.
+
 
     // point.draw();
     // point2.draw();
     // point.drawTo(point2);
 
+
     for (const point of points) {
-      point.draw();
+      point.draw()
     }
 
     const collinear = new FastCollinearPoints(points);
@@ -325,4 +340,4 @@ let sketch = function (p: p5) {
   //   };
 };
 
-new p5(sketch);
+new p5(sketch)
