@@ -7,10 +7,10 @@
   resolved "https://registry.npmjs.org/@types/p5/-/p5-1.7.6.tgz"
   integrity sha512-6pLTOo0V3N5jZb5nTwjiv3lPHLK3Z/TjbhQUj8CTWXocUk1Z/f6OHTp3Pcwi1BhWnf5gqKUcyEb1gP0KIJuQgw==
 
-p5@^1.9.0:
-  version "1.9.1"
-  resolved "https://registry.npmjs.org/p5/-/p5-1.9.1.tgz"
-  integrity sha512-TpuCll0KwyY8jyQbY9j4wCt+pA3Qv0egd4MqkrhJ58pBgdj5im5XsKpP/64gepDilJXTk126vWXiNAPeSezNdg==
+p5@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/p5/-/p5-1.9.3.tgz#bc0da17a392113c066f0eac749c38f14517ce07b"
+  integrity sha512-RnLMqejKJ9ZmBlUpCnVLYF1UnV/NnC13MfOSZdvJXTRH1eQkBQkUVCw5rkyRWE6chI4t5KvIJsZZnFzmGJEgag==
 
 typescript@^5.3.3:
   version "5.3.3"
