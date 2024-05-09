@@ -43,11 +43,12 @@ let sketch = function (p: p5) {
 
     p.strokeWeight(0)
     p.text('(0, 0)', padding + 10, height - 30)
-  }
 
     p.strokeWeight(0);
     p.text("(0, 0)", padding + 10, height - 30);
     p.noLoop();
+  }
+
 
   class Point {
     x: number;
